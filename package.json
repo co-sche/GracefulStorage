@@ -1,0 +1,25 @@
+{
+  "name": "GracefulStorage",
+  "version": "0.0.0",
+  "description": "localStorage wrapper that has namespace, expire, etc...",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "phantom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/co-sche/GracefulStorage.git"
+  },
+  "author": "co-sche",
+  "license": "MIT Licence",
+  "bugs": {
+    "url": "https://github.com/co-sche/GracefulStorage/issues"
+  },
+  "devDependencies": {
+    "phantomjs": "~1.9.7-3",
+    "sinon": "~1.9.1"
+  }
+}
