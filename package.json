@@ -1,13 +1,13 @@
 {
   "name": "GracefulStorage",
   "version": "0.0.0",
-  "description": "localStorage wrapper that has namespace, expire, etc...",
-  "main": "index.js",
+  "description": "localStorage wrapper that has namespace, expire, and cleanup functions",
+  "main": "./lib/graceful_storage.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec"
+    "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,9 @@
     "url": "https://github.com/co-sche/GracefulStorage/issues"
   },
   "devDependencies": {
-    "sinon": "~1.9.1",
-    "expect.js": "~0.3.1",
-    "mocha": "~1.18.2"
+    "sinon": "*",
+    "expect.js": "*",
+    "mocha": "*",
+	"istanbul": "*"
   }
 }

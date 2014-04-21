@@ -1,5 +1,3 @@
-var data = {};
-
 module.exports = Object.create({
 	getItem: function(key) {
 		return typeof this[key] !== 'undefined' ? this[key] : null;
@@ -10,5 +8,12 @@ module.exports = Object.create({
 	},
 	removeItem: function(key) {
 		delete this[key];
+	},
+
+	clear: function() {
+		var self = this;
+		Object.keys(this).forEach(function(key) {
+			delete self[key];
+		});
 	}
 });

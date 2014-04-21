@@ -1,0 +1,10 @@
+{
+	"undef": true,
+	"unused": "vars",
+	"sub": true,
+	"expr": true,
+	// "Missing radix parameter."
+	"-W065": false,
+	// "Confusing use of '{a}'."
+	"-W018": false
+}
