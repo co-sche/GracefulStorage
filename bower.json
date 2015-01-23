@@ -1,0 +1,28 @@
+{
+  "name": "GracefulStorage",
+  "version": "1.0.2",
+  "homepage": "https://github.com/co-sche/GracefulStorage",
+  "authors": [
+    "co-sche <co-sche@users.noreply.github.com>"
+  ],
+  "description": "WebStorage(localStorage, sessionStorage) wrapper that has namespace, expire, and cleanup functions",
+  "main": "lib/graceful_storage.js",
+  "moduleType": [
+    "amd",
+    "node",
+    "globals"
+  ],
+  "keywords": [
+    "WebStorage",
+    "localStorage",
+    "sessionStorage",
+    "namespace",
+    "expire"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test"
+  ]
+}

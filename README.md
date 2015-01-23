@@ -1,6 +1,6 @@
 # GracefulStorage
 
-localStorage wrapper that has namespace, expire, and cleanup functions
+WebStorage(localStorage, sessionStorage) wrapper that has namespace, expire, and cleanup functions
 
 ## Usage
 ```javascript
@@ -32,7 +32,7 @@ ex)
 ```javascript
 var s1 = new GracefulStorage(localStorage, 'storage1');
 s1.set('key1', 'val1');
-localStorage['GLOBAL_STORAGE:storage1:key1']
+localStorage['GRACEFUL_STORAGE:storage1:key1']
 // -> {"exptime": xxxxxxx, "data": "val1" }
 ```
 ### .sweep(storage: WebStorage, whitelist: Array[String]): Void
