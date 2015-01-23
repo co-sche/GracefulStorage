@@ -158,6 +158,17 @@ describe('GracefulStorage', function() {
 		});
 	});
 
+	describe('misc', function() {
+		it("should escape namespace and key from delimiter (:)", function() {
+			var alice = new GracefulStorage(localStorage, 'alice');
+			var mallory = new GracefulStorage(localStorage, 'alice:');
+			alice.set('key', 'val1');
+			mallory.set('key', 'val2');
+			expect(alice.dump()).to.eql({key: 'val1'});
+			expect(mallory.dump()).to.eql({key: 'val2'});
+		})
+	});
+
 	function dump() {
 		Object.keys(localStorage).forEach(function(key) {
 			console.log(key, localStorage[key]);
