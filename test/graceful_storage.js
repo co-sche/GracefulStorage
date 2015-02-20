@@ -90,6 +90,30 @@ describe('GracefulStorage', function() {
 		});
 	});
 
+	describe('#copy()', function() {
+		it("should copy container (value and exptime) from key1 to key2", function() {
+			s1.set('key1', 'val1', 100);
+			s1.copy('key1', 'key2');
+			clock.tick(90);
+			expect(s1.get('key1')).to.be('val1');
+			expect(s1.get('key2')).to.be('val1');
+			clock.tick(11);
+			expect(s1.get('key2')).to.be(void(0));
+		});
+	});
+
+	describe('#rename()', function() {
+		it("should rename container (value and exptime) from key1 to key2", function() {
+			s1.set('key1', 'val1', 100);
+			s1.rename('key1', 'key2');
+			expect(s1.get('key1')).to.be(void(0));
+			clock.tick(90);
+			expect(s1.get('key2')).to.be('val1');
+			clock.tick(11);
+			expect(s1.get('key2')).to.be(void(0));
+		});
+	});
+
 	describe('#flush()', function() {
 		it("should delete all key:value in self's namespace", function() {
 			s1.set('key1', 'val1');
