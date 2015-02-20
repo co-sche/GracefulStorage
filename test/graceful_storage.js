@@ -43,7 +43,7 @@ describe('GracefulStorage', function() {
 		});
 
 		it("should return undefined when that is invalid even if it was saved", function() {
-			var raw = s2.createRaw('key3', 'val3');
+			var raw = s2._pack('key3', 'val3');
 			localStorage.setItem(raw.key, JSON.stringify(raw.value));
 			expect(s2.get('key3')).to.be(void(0));
 		});
@@ -64,21 +64,21 @@ describe('GracefulStorage', function() {
 		});
 	});
 
-	describe('#touch()', function() {
-		it("should be touched successfuly if item is live", function() {
+	describe('#expire()', function() {
+		it("should be expired successfuly if item is live", function() {
 			s1.set('key1', 'val1', 100);
 			clock.tick(90);
 			expect(s1.get('key1')).to.be('val1');
-			expect(s1.touch('key1', 100)).to.be(true);
+			expect(s1.expire('key1', 100)).to.be(true);
 			clock.tick(90);
 			expect(s1.get('key1')).to.be('val1');
 			clock.tick(100);
 			expect(s1.get('key1')).to.be(void(0));
 		});
 
-		it("should not be touched if item isn't live", function() {
+		it("should not be expired if item isn't live", function() {
 			expect(s1.get('key1')).to.be(void(0));
-			expect(s1.touch('key1')).to.be(false);
+			expect(s1.expire('key1')).to.be(false);
 		});
 	});
 
@@ -93,24 +93,44 @@ describe('GracefulStorage', function() {
 	describe('#copy()', function() {
 		it("should copy container (value and exptime) from key1 to key2", function() {
 			s1.set('key1', 'val1', 100);
-			s1.copy('key1', 'key2');
+			expect(s1.copy('key1', 'key2')).to.be(true);
 			clock.tick(90);
 			expect(s1.get('key1')).to.be('val1');
 			expect(s1.get('key2')).to.be('val1');
 			clock.tick(11);
 			expect(s1.get('key2')).to.be(void(0));
 		});
+
+		it("should not copy if original pair is not exists", function() {
+			s1.set('key1', 'val1');
+			expect(s1.get('key0')).to.be(void(0));
+			expect(s1.copy('key0', 'key1')).to.be(false);
+			expect(s1.get('key1')).to.be('val1');
+		});
+
+		it("should not copy if target pair is invalid", function() {
+			s2.set('key1', 'val1');
+			expect(s2.copy('key1', 'key3')).to.be(false);
+			expect(s2.get('key3')).to.be(void(0));
+		});
 	});
 
 	describe('#rename()', function() {
 		it("should rename container (value and exptime) from key1 to key2", function() {
 			s1.set('key1', 'val1', 100);
-			s1.rename('key1', 'key2');
+			expect(s1.rename('key1', 'key2')).to.be(true);
 			expect(s1.get('key1')).to.be(void(0));
 			clock.tick(90);
 			expect(s1.get('key2')).to.be('val1');
 			clock.tick(11);
 			expect(s1.get('key2')).to.be(void(0));
+		});
+
+		it("should not rename if failed to copy", function() {
+			s2.set('key1', 'val1');
+			expect(s2.rename('key1', 'key3')).to.be(false);
+			expect(s2.get('key1')).to.be('val1');
+			expect(s2.get('key3')).to.be(void(0));
 		});
 	});
 
