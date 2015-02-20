@@ -53,9 +53,17 @@ undefined以外のJSON.stringifyを通るものならなんでも。
 値が入っていない場合はundefinedを返す。
 ### #del(key: String): Void
 値の削除。
-### #touch(key: String, exptime: Integer): Boolean
+### #copy(key: String, newKey: String): Void
+keyからnewKeyに値を(寿命も含めて)複製する。
+### #rename(key: String, newKey: String): Void
+keyからnewKeyに名前を変更する。
+### #expire(key: String, exptime: Integer): Boolean
 指定されたexptimeで延命する。
 戻り値のBooleanは延命できたかどうか。
+
+### #touch
+\#expireのエイリアス
+**depricated**
 ### #each(callback: (value: JSONSerializable, key: String) => Void): Void
 該当GracefulStorageインスタンスの管理下にあるkey, valueを引数に、指定されたcallbackを呼び出す。
 この際、callbackのスコープのthisはGracefulStorageインスタンスに設定される。
