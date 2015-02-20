@@ -1,6 +1,6 @@
 {
   "name": "GracefulStorage",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "localStorage wrapper that has namespace, expire, and cleanup functions",
   "main": "./lib/graceful_storage.js",
   "directories": {
